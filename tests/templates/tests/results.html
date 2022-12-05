@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }} :: Результаты теста
+{% endblock %}
+
+{% block sidebar %}
+{% include 'inc/_sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+
+<div class="card mb-3">
+    <div class="card-header">
+        Категория: <a href="{{ test.category.get_absolute_url }}">{{test.category}}</a>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">{{test.title}}</h5>
+        <p class="card-text">{{test.description}}</p>
+        <h6>Результаты:</h6>
+        <p>Количество правильных ответов: {{correct}}</p>
+        <p>Количество неправильных ответов: {{incorrect}}</p>
+        <p>{{percents}}</p>
+    </div>
+</div>
+{% endblock %}

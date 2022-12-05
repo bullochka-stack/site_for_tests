@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }} :: {{ test.name }}
+{% endblock %}
+
+{% block sidebar %}
+{% include 'inc/_sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+
+<div class="card mb-3">
+    <div class="card-header">
+        Категория: <a href="{{ test.category.get_absolute_url }}">{{test.category}}</a>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">{{test.title}}</h5>
+        <p class="card-text">{{test.description}}</p>
+
+        {% for a_q in answers_and_questions %}
+        <hr>
+        Вопрос: {{a_q.question}}
+        <p></p>
+        {% if flag %}
+        <form action="{% url 'test_page' test_id=test.pk number_question=count_quest %}" method="post">
+            {% csrf_token %}
+            {% for key, value in a_q.answers.items %}
+            <label>
+                <input type="checkbox" name="answer" value="{{value.pk}}">
+            </label>  {{value.answer_text}}
+            {{form.errors}}
+            <p></p>
+            {% endfor %}
+            <button class="btn btn-primary btn-block btn-dark" type="submit">Следующий вопрос</button>
+        </form>
+        {% else %}
+        <form action="{% url 'test_page' test_id=test.pk number_question=count_quest %}" method="post">
+            {% csrf_token %}
+            {% for key, value in a_q.answers.items %}
+            <label>
+                <input type="checkbox" name="answer" value="{{value.pk}}">
+            </label>  {{value.answer_text}}
+            {{form.errors}}
+            <p></p>
+            {% endfor %}
+            <button class="btn btn-primary btn-block btn-dark" type="submit">Завершить тест</button>
+        </form>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

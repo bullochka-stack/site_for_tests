@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  {{ title }} :: {{ block.super }}
+{% endblock %}
+
+{% block sidebar %}
+{% include 'inc/_sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+{% for item in tests %}
+<div class="card mb-3">
+  <div class="card-header">
+    Категория: <a href="{{ item.category.get_absolute_url }}">{{item.category}}</a>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{item.title}}</h5>
+    <p class="card-text">{{item.description}}</p>
+    <a href="{{ item.get_absolute_url }}" class="btn btn-dark">Пройти тест</a>
+  </div>
+</div>
+{% endfor %}
+{% endblock %}
