@@ -1,0 +1,3 @@
+/venv/
+/TestSite/TestSite/settings_local.py
+/TestSite/db.sqlite3
