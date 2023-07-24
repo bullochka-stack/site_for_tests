@@ -34,14 +34,22 @@ pip install -r requirements.txt
 
 5) В файле settings.py заполнить необходимые данные.
 
-6) Создать и применить миграции БД:
+6) Создать папку static
+
+7) Собрать статику:
+
+```
+python manage.py collectstatic
+```
+
+8) Создать и применить миграции БД:
 
 ```
 python manage.py makemigrations
 python manage.py migrate
 ```
 
-7) Запустить сервер:
+8) Запустить сервер:
 
 ```
 python manage.py runserver
